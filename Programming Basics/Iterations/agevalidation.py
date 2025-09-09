@@ -12,3 +12,22 @@ def method2():
     while (age <= 11 or age > 18):
         age = int(input("Enter an age: "))
     print("Age is:", age)
+
+gravity = 10
+
+def printGravity():
+    print(gravity)
+
+def updateGravity(n):
+    gravity = n
+
+def averageArray(arr):
+    total = 0
+    for num in range(len(arr)):
+        total = total +
+
+
+printGravity()
+print(gravity)
+updateGravity(5)
+printGravity()
