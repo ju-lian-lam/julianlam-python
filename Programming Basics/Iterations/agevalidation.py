@@ -21,12 +21,6 @@ def printGravity():
 def updateGravity(n):
     gravity = n
 
-def averageArray(arr):
-    total = 0
-    for num in range(len(arr)):
-        total = total +
-
-
 printGravity()
 print(gravity)
 updateGravity(5)
