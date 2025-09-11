@@ -42,7 +42,7 @@ def question4()->None:
 # end function
 
 def question5()->None:
-    year = int(input())
+    year = int(input("Enter a year: "))
     leapYear = False
     if ((year % 4) == 0):
         leapYear = True
