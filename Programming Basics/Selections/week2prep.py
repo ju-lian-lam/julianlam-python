@@ -57,5 +57,3 @@ def question5()->None:
         print(f"{year} is not a leap year.")
     # end if
 # end function
-
-question5()
