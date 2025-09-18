@@ -1,0 +1,21 @@
+def question3():
+    total_parts = 0
+    old_models = 0
+
+    while True:
+        part_number = input("Enter a part number: ")
+        if part_number == "9999":
+            break
+        # end if
+        if (len(part_number) != 4):
+            print("Incorrect part number length: ")
+        # end if
+        total_parts = total_parts + 1
+        last_digit = int(part_number[-1])
+        if (last_digit == 6) or (last_digit == 7) or (last_digit == 8):
+            old_models = old_models + 1
+        # end if
+    # end while
+    print(f"Total parts entered: {total_parts}")
+    print(f"Total old models: {old_models}")
+# end subroutine
