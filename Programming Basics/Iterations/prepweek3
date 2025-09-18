@@ -19,3 +19,94 @@ def question3():
     print(f"Total parts entered: {total_parts}")
     print(f"Total old models: {old_models}")
 # end subroutine
+
+def multiples(table,startnum,endnum,pupilName)->None:
+    print(f'Hi, {pupilName} ... here is your times table')
+    for i in range(startnum,endnum+1):
+        print(f'{table} x {startnum} = {table * startnum}')
+        startnum = startnum + 1
+    # end for
+# end procedure
+
+# pupilName = input("What is your name?")
+# table = int(input(("Enter times table: ")))
+# startnum = int(input(("Enter start number: ")))
+# endnum = int(input(("Enter end number: ")))
+# multiples(table,startnum,endnum,pupilName)
+
+def question3dot2():
+    while True:
+        password = input("Enter password: ")
+        if (len(password) < 6 or len(password) > 8):
+            print("Error. Password must be 6 to 8 characters long")
+        else:
+            pass2 = input("Enter password again: ")
+            if(password == pass2):
+                print("Password change successful")
+                break
+            else:
+                print("Error - passwords do not match.")
+
+def question4():
+    carparkgrid = [["empty" for r in range(10) for c in range (6)]]
+    print(carparkgrid)
+    print("1. Reset all spaces in the car park to 'empty'")
+    print("2. Park a car")
+    print("3. Remove a car")
+    print("4. Display the car park grid")
+    print("5. Quit\n")
+    option = int(input())
+    while(option != 5):
+        if (option == 1):
+            carparkgrid = [["empty" for r in range(10) for c in range (6)]]
+        elif (option == 2):
+            registration = input()
+            while True:
+                row = int(input())
+                col = int(input())
+                if (carparkgrid[row][col] == "empty"):
+                    carparkgrid[row][col] = registration
+                    break
+                else:
+                    print("Already being used, please re-enter: ")
+        elif (option == 3):
+            registration = input()
+            for r in range(10):
+                for c in range(6):
+                    if (carparkgrid[r][c] == registration):
+                        carparkgrid[r][c] = "empty"
+        elif (option == 4):
+            print(carparkgrid)
+        else:
+            option = input("Invalid choice - please re-enter: ")
+        print("1. Reset all spaces in the car park to 'empty'")
+        print("2. Park a car")
+        print("3. Remove a car")
+        print("4. Display the car park grid")
+        print("5. Quit\n")
+    print("Goodbye")
+
+def q2():
+    for i in range(0,3):
+        password = input("Enter a password: ")
+        if (password == "Tues1212"):
+            print("Password accepted")
+            break
+        else:
+            print("Password rejected")
+
+q2()
+
+firstletter = input()
+smallest = firstletter
+largest = firstletter
+
+for i in range (1,5):
+    letter = input()
+    if (letter < smallest):
+        smallest = letter
+    elif (letter > largest):
+        largest = letter
+
+print(f'Smallest letter - {smallest}')
+print(f'Largest letter - {largest}')
