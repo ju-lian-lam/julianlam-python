@@ -1,15 +1,50 @@
 import pygame, random
 
+# Use a class to create a record structure
 class Snowflake:
-    def __init__(self)->None:
-        self.x
-        self.y
-        self.speed
-        self.size
+    colour = 0xFFFF00
+    def __init__(self,x,y,speed,size)->None: #new
+        #These are the fields or attributes
+        self.__x = x
+        self.__y = y
+        self.__speed = speed
+        self.__size = size
+    #end constructor
+
+    def fall(self):
+        if self.__y > 500:
+            self.__y = 0
+            self.__x = random.randint(1,699)
+        else:
+            self.__y += self.__speed
+        #end if
+    #end procedure
+
+    def draw(self,screen)->None:
+        pygame.draw.rect(screen, Snowflake.colour,
+                         [self.__x, self.__y, self.__size, self.__size], 
+                         0)
+    #end procedure
+
+    def __str__(self)->str:
+        return_str = f'Snowflake: x={self.__x}, y={self.__y}, speed={self.__speed}, size={self.__size}'
+    def __repr__(self)->str:
+        return f'Snowflake({self.__x},{self.__y},{self.__speed},{self.__size})'
+    
+    def setSpeed(self):
+        self.__speed = 10
+    # end procedure
+
+    def getSpeed(self):
+        return self.__speed
+    # end function
+
+#end class
+
 
 # Define some colors
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
+BLACK = (0,0,0)
+WHITE = (0xFF, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
@@ -19,71 +54,53 @@ pygame.init()
 size = (700, 500)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Snowdrop OOP 1")
 
 # Loop until the user clicks the close button.
 gameOver = False
-xPos = 345
-yPos = 10
-rect_width = 10
-rect_len = 10
-speed = 5
+flakes = []
+for _ in range(50):
+    flakes.append(Snowflake(random.randint(1,490),random.randint(1,690),2,10))
+#next _
 
-x1Pos,y1Pos = initFlakes()
-x2Pos,y2Pos = initFlakes()
-x3Pos,y3Pos = initFlakes()
-
-mySnowflake = Snowflake(random.randint(1,490),random.randint(1,690),2,10)
-
-print(mySnowflake.x,mySnowflake.y,)
+first = flakes[0]
+first.colour = 0x0000FF
+first.setSpeed()
+print(first.getSpeed())
+print(first.colour)
 
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
 # -------- Main Program Loop -----------
-x1 = random.randint(0, size[0] - 10)
-x2 = random.randint(0, size[0] - 10)
-x3 = random.randint(0, size[0] - 10)
-y1 = random.randint(-100, 0)
-y2 = random.randint(-100, 0)
-y3 = random.randint(-100, 0)
-speed1 = random.randint(2, 6)
-speed2 = random.randint(2, 6)
-speed3 = random.randint(2, 6)
-
 while not gameOver:
     # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             gameOver = True
 
-    # --- Game logic: move left and right
-    y1 = y1 + speed1
-    y2 = y2 + speed2
-    y3 = y3 + speed3
-    if y1 > size[1]:
-        x1 = random.randint(0, size[0] - 10)
-        y1 = random.randint(-50, 0)
-        speed1 = random.randint(2, 6)
-    if y2 > size[1]:
-        x2 = random.randint(0, size[0] - 10)
-        y2 = random.randint(-50, 0)
-        speed2 = random.randint(2, 6)
-    if y3 > size[1]:
-        x3 = random.randint(0, size[0] - 10)
-        y3 = random.randint(-50, 0)
-        speed3 = random.randint(2, 6)
+    # --- Game logic should go here
+    #set x and y coordinates
 
-    # --- Screen-clearing code
+    for flake in flakes:
+        flake.fall()
+    #next flake
+
+    # --- Screen-clearing code goes here
+
+    # Here, we clear the screen to white. Don't put other drawing commands
+    # above this, or they will be erased with this command.
+
+    # If you want a background image, replace this clear with blit'ing the
+    # background image.
     screen.fill(BLACK)
 
-    # --- Drawing code:
-    pygame.draw.rect(screen, WHITE, [x1, y1, 10, 10])
-    pygame.draw.rect(screen, WHITE, [x2, y2, 10, 10])
-    pygame.draw.rect(screen, WHITE, [x3, y3, 10, 10])
+    # --- Drawing code should go here
+    for flake in flakes:
+        flake.draw(screen)
+    #next flake
 
-
-    # --- Update the screen
+    # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
 
     # --- Limit to 60 frames per second
