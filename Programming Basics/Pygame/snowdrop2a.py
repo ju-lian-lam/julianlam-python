@@ -39,6 +39,34 @@ class Snowflake:
         return self.__speed
     # end function
 
+    def setSize(self,size):
+        self.__size = size
+    # end procedure
+
+    def getSize(self):
+        return self.__size
+    # end function
+
+#end class
+
+
+class Snowball(Snowflake):
+    colour = 0xFFFFFF
+    def __init__(self,x,y,speed,size,time)->None: #new
+        super().__init__(x,y,speed,size)
+        self.__time = time
+        self.__counter = 0 
+        Snowball.colour = 0xFFFFFF
+    #end constructor
+
+    def fall(self):
+        super().fall()
+        self.__counter = self.__counter + 1
+        if self.__counter == self.__time * 60:
+            self.setSize(self.getSize() + 3)
+            self.__counter = 0
+        # end if
+    #end procedure
 #end class
 
 
@@ -62,6 +90,9 @@ flakes = []
 for _ in range(50):
     flakes.append(Snowflake(random.randint(1,490),random.randint(1,690),2,10))
 #next _
+balls = []
+for _ in range(20):
+    balls.append(Snowball(random.randint(1,490),random.randint(1,690),5,15,2))
 
 first = flakes[0]
 first.colour = 0x0000FF
@@ -86,6 +117,9 @@ while not gameOver:
         flake.fall()
     #next flake
 
+    for ball in balls:
+        ball.fall()
+
     # --- Screen-clearing code goes here
 
     # Here, we clear the screen to white. Don't put other drawing commands
@@ -99,6 +133,9 @@ while not gameOver:
     for flake in flakes:
         flake.draw(screen)
     #next flake
+
+    for ball in balls:
+        ball.draw(screen)
 
     # --- Go ahead and update the screen with what we've drawn.
     pygame.display.flip()
