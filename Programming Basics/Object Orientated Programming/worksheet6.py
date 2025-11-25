@@ -65,3 +65,20 @@ print("Shoes chewed by puppy:", myPuppy1.getShoesChewed())
 myPuppy1.bark(2)
 myPuppy2.bark(3)
 myDog3.bark(2)
+
+mammals = []
+names = ["Bella", "Charlie", "Max", "Luna", "Rocky"]
+colours = ["White", "Black", "Brown", "Golden", "Grey"]
+for i in range(5):
+    if i % 2 == 0:
+        mammal = Dog(names[i], colours[i])
+    else:
+        mammal = Puppy(names[i], colours[i], i)
+    mammals.append(mammal)
+    #next i
+#end for
+
+for mammal in mammals:
+    mammal.bark(1)
+    #next mammal
+#end for
