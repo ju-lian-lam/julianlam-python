@@ -29,6 +29,7 @@ class Bird:
     def get_rect(self):
         return pygame.Rect(self.x - 15, int(self.y - 15), 30, 30)
     
+
 class Pipe:
     def __init__(self):
         self.x = WIDTH
@@ -51,7 +52,8 @@ class Pipe:
         top_pipe = pygame.Rect(self.x, 0, self.width, self.top_height)
         bottom_pipe = pygame.Rect(self.x, self.bottom_y, self.width, HEIGHT - self.bottom_y)
         return bird_rect.colliderect(top_pipe) or bird_rect.colliderect(bottom_pipe)
-    
+
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -67,8 +69,9 @@ class Game:
 
     def reset(self):
         self.bird = Bird()
-        self.pipes.clear()
+        self.pipes = []    
         self.score = 0
+        pygame.time.delay(400)
 
     def draw_score(self):
         font = pygame.font.SysFont(None, 36)
@@ -99,11 +102,11 @@ class Game:
                 if pipe.collide(self.bird):
                     self.reset()
 
-                if pipe.x + pipe.width < self.bird.x and not pipe.passed:
+                if not pipe.passed and pipe.x + pipe.width < self.bird.x:
                     pipe.passed = True
                     self.score += 1
 
-            self.pipes = [p for p in self.pipes if p.x > -60]
+            self.pipes = [p for p in self.pipes if p.x > -p.width]
 
             if self.bird.y > HEIGHT or self.bird.y < 0:
                 self.reset()
@@ -117,3 +120,5 @@ class Game:
             self.draw_score()
             pygame.display.update()
 
+if __name__ == "__main__":
+    Game().run()
